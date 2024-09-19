@@ -1,6 +1,6 @@
 const mDnsSd = require("node-dns-sd");
 const fs = require("fs");
-const getConnectedWifi = require("./getWifI");
+// const getConnectedWifi = require("./getWifI");
 const { insertInstances } = require("./dbFunctions");
 
 let unique_IPs = new Set(); // Set to track unique device IPs
@@ -15,7 +15,7 @@ async function discoverDevices() {
       name: "_googlecast._tcp.local", // Discover Google Cast devices
     });
 
-    const wifi = await getConnectedWifi(); // Get connected Wi-Fi network info
+    // const wifi = await getConnectedWifi(); // Get connected Wi-Fi network info
 
     // Map discovered devices to a structured format
     const devices_data = device_list.map((device) => ({
@@ -25,7 +25,7 @@ async function discoverDevices() {
       fqdn: device.fqdn,
       port: device.service.port,
       protocol: device.service.protocol,
-      network: wifi,
+      // network: wifi,
     }));
 
     // Filter new devices by checking if their IP is already in the Set
@@ -89,7 +89,7 @@ async function runDiscovery() {
     saveToFile("device_list.json", discovered_devices);
 
     // Process and insert discovered devices into the database
-    await processDiscoveredDevices();
+    // await processDiscoveredDevices();
 
     // Wait for 5 seconds before the next discovery attempt
     await wait(5000);
