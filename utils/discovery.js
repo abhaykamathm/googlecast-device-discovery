@@ -85,6 +85,9 @@ async function runDiscovery() {
     await discoverDevices();
     attempt++;
 
+    // Log the discovered devices as a table to the console
+    console.table(discovered_devices);
+
     // Save discovered devices to a JSON file
     saveToFile("device_list.json", discovered_devices);
 
